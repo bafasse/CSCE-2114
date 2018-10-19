@@ -1,0 +1,44 @@
+|lab2
+F <= lpm_or0:inst6.result
+A => inst1.IN0
+B => inst2.IN0
+C => inst3.IN0
+D => inst4.IN0
+
+
+|lab2|lpm_or0:inst6
+data0 => lpm_or:lpm_or_component.data[0][0]
+data1 => lpm_or:lpm_or_component.data[1][0]
+result <= lpm_or:lpm_or_component.result[0]
+
+
+|lab2|lpm_or0:inst6|lpm_or:lpm_or_component
+data[0][0] => or_node[0][1].IN1
+data[1][0] => or_node[0][1].IN0
+result[0] <= or_node[0][1].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|lab2|lpm_and0:inst
+data0 => lpm_and:lpm_and_component.data[0][0]
+data1 => lpm_and:lpm_and_component.data[1][0]
+result <= lpm_and:lpm_and_component.result[0]
+
+
+|lab2|lpm_and0:inst|lpm_and:lpm_and_component
+data[0][0] => and_node[0][1].IN1
+data[1][0] => and_node[0][1].IN0
+result[0] <= and_node[0][1].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|lab2|lpm_and0:inst5
+data0 => lpm_and:lpm_and_component.data[0][0]
+data1 => lpm_and:lpm_and_component.data[1][0]
+result <= lpm_and:lpm_and_component.result[0]
+
+
+|lab2|lpm_and0:inst5|lpm_and:lpm_and_component
+data[0][0] => and_node[0][1].IN1
+data[1][0] => and_node[0][1].IN0
+result[0] <= and_node[0][1].DB_MAX_OUTPUT_PORT_TYPE
+
+

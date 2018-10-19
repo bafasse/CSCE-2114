@@ -1,0 +1,47 @@
+LIBRARY ieee; 
+USE ieee.std_logic_1164.all; 
+
+ENTITY lab8 IS 
+PORT( Clock, Rstn, Enable :IN  STD_LOGIC; 
+      Count               :OUT STD_LOGIC_VECTOR(1 DOWNTO 0)); 
+END lab8; 
+
+ARCHITECTURE Behavior OF lab8 IS 
+TYPE State_type IS(S0, S1, S2, S3); 
+SIGNAL y : State_type; 
+
+BEGIN 
+  PROCESS(Rstn,Clock,Enable) 
+	BEGIN 
+		IF Rstn ='0' THEN 
+			y <= S0;	
+		ELSIF (Clock'EVENT AND Clock = '1') THEN 
+			IF (Enable = '1') THEN
+				CASE y IS 
+					WHEN S0=> y <= S1;
+					WHEN S1=> y <= S2;
+					WHEN S2=> y <= S3;
+					WHEN S3=> y <= S0;
+				END CASE;
+			ELSIF (Enable = '0') THEN
+				CASE y IS 
+					WHEN S0=> y <= S0;
+					WHEN S1=> y <= S1;
+					WHEN S2=> y <= S2;
+					WHEN S3=> y <= S3;
+				END CASE;	
+							
+			END IF; 
+		END IF; 
+	END PROCESS;
+	
+	PROCESS(y)
+		Begin
+			Case y IS
+				WHEN S0 => Count <= "00";
+				WHEN S1 => Count <= "01";
+				WHEN S2 => Count <= "10";
+				WHEN S3 => Count <= "11";
+			END CASE;
+	END PROCESS;
+END Behavior; 

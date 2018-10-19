@@ -1,0 +1,33 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+
+ENTITY lab7 IS 
+	PORT (     Clock   : IN  STD_LOGIC;
+		   T       : IN  STD_LOGIC;
+		   Preset  : IN  STD_LOGIC;
+		   Clrn    : IN  STD_LOGIC;
+		   Q       : OUT STD_LOGIC;
+		   Qn      : OUT STD_LOGIC);
+END lab7;
+ 
+ARCHITECTURE Behavior OF lab7 IS
+SIGNAL TEMP: STD_LOGIC;
+Begin
+	PROCESS(Clrn,Clock, Preset)
+	Begin
+		IF Clrn = '0' THEN 
+			TEMP <= '0';
+		ELSIF Preset = '0' THEN
+			TEMP <= '1';
+		ELSIF (Clock'EVENT AND Clock = '1') THEN
+			IF T = '0' THEN
+				TEMP <= TEMP;
+			ELSIF T = '1' THEN
+				TEMP <= NOT(TEMP);
+			END IF;
+		END IF;
+		Q <= TEMP;
+		Qn <= NOT(TEMP);
+	END PROCESS;	
+END Behavior; 
+			
